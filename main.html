@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Bebe 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #00b894 0%, #81ecec 100%);
+    min-height: 100vh;
+    color: #006d5b;
+    overflow-x: hidden;
+}
+
+        /* Floating Hearts Background */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 16px;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .navbar {
+    background: rgba(0, 184, 148, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #2d3436;
+            font-size: 0.95em;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+       .nav-btn:hover {
+    background: rgba(0, 184, 148, 0.2);
+    transform: translateY(-2px);
+}
+
+        .nav-btn.active {
+    background: linear-gradient(135deg, #00b894, #81ecec);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+}
+
+        .nav-btn::after {
+            content: '💕';
+            position: absolute;
+            right: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .nav-btn.active::after {
+            opacity: 1;
+        }
+
+        .content {
+            margin-top: 70px;
+            padding: 20px 15px;
+        }
+
+        .section {
+    display: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 184, 148, 0.1);
+}
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2d3436;
+            text-shadow: 2px 2px 4px rgba(45, 52, 54, 0.1);
+            line-height: 1.3;
+        }
+
+        /* Letters Section Styles */
+        .letters-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .my-dearest {
+    font-size: 1.5em;
+    color: #00b894;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+        .letter-header {
+            font-size: 1.8em;
+            color: #2d3436;
+            margin-bottom: 25px;
+        }
+
+        .letter-container {
+            display: grid;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .letter-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #a8e6f0;
+            border-radius: 18px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: '💌';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 1.3em;
+            opacity: 0.7;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(116, 185, 255, 0.2);
+            border-color: #74b9ff;
+        }
+
+        .letter-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .letter-title {
+            font-size: 1.2em;
+            color: #2d3436;
+            font-weight: bold;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .click-to-open {
+    background: linear-gradient(135deg, #00b894, #81ecec);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 18px;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+        .letter-card:hover .click-to-open {
+            transform: scale(1.05);
+        }
+
+        .letter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        .letter-content.expanded {
+            max-height: 2000px;
+            margin-top: 15px;
+            opacity: 1;
+            padding-top: 15px;
+            border-top: 2px dashed #a8e6f0;
+        }
+
+        .letter-text {
+            line-height: 1.7;
+            font-size: 1em;
+            color: #666;
+            text-align: justify;
+        }
+
+        /* Music Section */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .music-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid #a8e6f0;
+        }
+
+        .music-card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Notes Section */
+        .notes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .note-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 20px;
+    border-radius: 18px;
+    border-left: 5px solid #00b894;
+}
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 15px;
+            border-radius: 18px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #a8e6f0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(116, 185, 255, 0.2);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Modal for enlarged image view */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2001;
+        }
+
+        .close:hover {
+            color: #fd79a8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tablet Styles (768px and below) */
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            
+            .content {
+                margin-top: 65px;
+                padding: 15px 10px;
+            }
+            
+            .section {
+                padding: 25px 20px;
+                border-radius: 18px;
+            }
+            
+            h2 {
+                font-size: 1.8em;
+            }
+            
+            .my-dearest {
+                font-size: 1.4em;
+            }
+            
+            .letter-header {
+                font-size: 1.6em;
+            }
+            
+            .letter-title {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Mobile Styles (480px and below) */
+        @media screen and (max-width: 480px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .nav-container {
+                gap: 8px;
+                padding: 0 10px;
+            }
+            
+            .nav-btn {
+                font-size: 0.85em;
+                padding: 8px 12px;
+                border-radius: 15px;
+            }
+            
+            .nav-btn::after {
+                right: 6px;
+                font-size: 0.8em;
+            }
+            
+            .content {
+                margin-top: 60px;
+                padding: 10px 8px;
+            }
+            
+            .section {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            h2 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+            
+            .letters-header {
+                margin-bottom: 20px;
+            }
+            
+            .my-dearest {
+                font-size: 1.3em;
+            }
+            
+            .letter-header {
+                font-size: 1.4em;
+            }
+            
+            .letter-container {
+                gap: 15px;
+            }
+            
+            .letter-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .letter-preview {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .letter-title {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .click-to-open {
+                align-self: flex-end;
+            }
+            
+            .letter-text {
+                font-size: 0.95em;
+                line-height: 1.6;
+            }
+            
+            .music-grid,
+            .notes-container,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .music-card,
+            .note-card,
+            .gallery-item {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .heart {
+                font-size: 14px;
+            }
+        }
+
+        /* Small Mobile Styles (360px and below) */
+        @media screen and (max-width: 360px) {
+            .nav-btn {
+                font-size: 0.8em;
+                padding: 7px 10px;
+            }
+            
+            .section {
+                padding: 15px 12px;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+            
+            .my-dearest {
+                font-size: 1.2em;
+            }
+            
+            .letter-header {
+                font-size: 1.3em;
+            }
+            
+            .letter-card {
+                padding: 12px;
+            }
+            
+            .letter-title {
+                font-size: 1em;
+            }
+            
+            .click-to-open {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Landscape Orientation for Mobile */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .navbar {
+                padding: 8px 0;
+            }
+            
+            .content {
+                margin-top: 55px;
+                padding: 10px 8px;
+            }
+            
+            .section {
+                padding: 15px 20px;
+            }
+            
+            .letter-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        /* Audio Player Responsive */
+        audio {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('letters')">Letters</button>
+            <button class="nav-btn" onclick="showSection('music')">Music</button>
+            <button class="nav-btn" onclick="showSection('notes')">Notes</button>
+            <button class="nav-btn" onclick="showSection('gallery')">Gallery</button>
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- Letters Section -->
+        <div id="letters" class="section active">
+            <div class="letters-header">
+                <div class="my-dearest">My Dearest</div>
+            </div>
+            
+            <div class="letter-container">
+                <!-- Letter 1 -->
+                <div class="letter-card" onclick="toggleLetter(this)">
+                    <div class="letter-preview">
+                        <div class="letter-title">My Love For You</div>
+                        <div class="click-to-open">Click to Open 💕</div>
+                    </div>
+                    <div class="letter-content">
+                        <div class="letter-text">
+                            <p>My dearest bebe</p>
+                            <br>
+                           <p>From the moment you came into my life, everything changed. your smile became my favorite sight your laughter my favorite sound and your love my greatest treasure</p>
+<br>
+<p>Every day with you feels like a beautiful adventure i love the way your eyes light up when you're happy, the days we fight together and other things that making this adventure difficult but we can do it bebe</p>
+<br>
+<p>You are my sunshine on cloudy days my comfort in difficult times and my happiness always. i promise to love you cherish you and stand by you through everything life brings our way</p>
+<br>
+<p>i built this website for us a place to keep our letters, memories and every piece of our story safe forever</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letter 2 -->
+                <div class="letter-card" onclick="toggleLetter(this)">
+                    <div class="letter-preview">
+                        <div class="letter-title">Why You're Special</div>  
+                        <div class="click-to-open">Click to Open 💕</div>
+                    </div>
+                    <div class="letter-content">
+                        <div class="letter-text">
+                            <p>My sweet bebe ko</p>
+        <br>
+        <p>I want you to know just how deeply special you are to me. it's not just one thing it's every little part of you that makes my heart race and my days brighter</p>
+        <br>
+        <p>your laughter lights up even my darkest days, and your smile is my favorite sight in the world. uour strength inspires me to be better, your intelligence amazes me constantly and your compassion makes me fall for you more every single day.</p>
+        <br>
+        <p>You are my best friend, my confidant, my safe place, my partner in adventure, and my soulmate. and even my smallest worries disappear when i'm with you but we cant avoid the other worries sometimes. I'm endlessly grateful to have you in my life, and I promise to always  love and stand by you.</p>
+        <br>
+        <p>Everything about you is extraordinary, and I love every part of you more than words can ever capture.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letter 3 -->
+                <div class="letter-card" onclick="toggleLetter(this)">
+                    <div class="letter-preview">
+                        <div class="letter-title">Our Beautiful Future</div>
+                        <div class="click-to-open">Click to Open 💕</div>
+                    </div>
+                    <div class="letter-content">
+                        <div class="letter-text">
+                            <p>bebe</p>
+                            <br>
+                            <p>As i think about our future together, my heart fills with so much excitement and joy. I can't wait to create countless more memories with you.</p>
+                            <br>
+                            <p>I dream of our adventures together traveling to new places, building a home filled with love and laughter, supporting each other's dreams, and growing old together</p>
+                            <br>
+                            <p>No matter what the future holds, I know that as long as we're together, everything will be perfect. You are my always and forever.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letter 4 -->
+                <div class="letter-card" onclick="toggleLetter(this)">
+                    <div class="letter-preview">
+                        <div class="letter-title">sorry</div>  
+                        <div class="click-to-open">Click to Open 💕</div>
+                    </div>
+                    <div class="letter-content">
+                        <div class="letter-text">
+                            <p>ellow bebe</p>
+        <br>
+        <p>lately we've been having painful and tiring days maybe that's because we have no control or maybe because we dont fear that one of us will leave because we know it wont happen a im sorry if i disappoint u a lot a im really immature, i thought all those promises will happen but i forgot i am me the reason why i disappointed u. im sorry if i had the thought to make u leave me last time a its just that i cant bear to see u suffering anymore a i know u love me and u wont leave me but i cant eee i cant seeing you like that it hurts me a im hating myself more because of these things a maybe if only we didnt meet u wouldnt be like this a im really sorry. im still trying to be better but those problems just keep coming in unconsciously and it drains u more a i love you super so much but im slowly destroying ur life a i never want to be the reason for your sadness or pain a i just want to see you smile and feel safe a i know I have a lot to work on but I promise I will keep trying, for us, for you, for the love we share a please forgive my mistakes, even when I feel lost and overwhelmed a i am learning, slowly, to be the person you deserve and the one I want to be for you a i love you more than anything, and I never want to hurt you intentionally again a thank you for being patient with me, even when I fail a you mean the world to me, and I will do everything I can to make our love stronger, kinder, and happier.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="letter-card" onclick="toggleLetter(this)">
+                    <div class="letter-preview">
+                        <div class="letter-title">sorry(1)</div>
+                        <div class="click-to-open">Click to Open 💕</div>
+                    </div>
+                    <div class="letter-content">
+                        <div class="letter-text">
+                            <p>bebe</p>
+                            <br>
+                            <p>so yeah, i have done it again, i disappointed u again. i didnt communicate well again, dw baby u are not the only one who feels disappointed, i am disappointed more in myself than u do. eee i did some reflecting and i found out that i dont know what im doing last night, i realized that my mental health is messed up too and im scared that it will affect u too. when u said u will show less, it hurts but i understand why. i know i gave u reasons to do that, but i really dont want it to happen. i want to fix things with u, i want us to be okay again. i hate that i keep making u feel bad, i hate that im the reason for your tears. i feel like im losing myself every time we fight, i feel helpless. i just sit there crying, wishing i could undo everything. im sorry if i ever made u think that leaving me is the best option, i dont ever want that. i just dont know how to handle my emotions sometimes, but i promise this will be the last time i act that way. i promise, bebe. i know im not the best guy for u, i mess things up a lot, i say things i dont mean, i hurt u even when i dont want to. but please know i love u so much, i always do, even if my actions dont show it right. i just get lost in my head sometimes, but im trying to get better for u, for us. i miss when we just laughed and played and everything felt light. i want that again, i dont care how long it takes, i’ll try harder this time. i’ll stop letting my thoughts control me, i just need u to stay with me through it. i’ll make things right, i swear. i want to make it up to u properly, so i’ll write u an apology letter and update the website for u. i just want u to know how sorry i am, how much u mean to me. i love u, bebe, im really sorry. i just keep thinking about u and everything we’ve been through, how u always stayed even when i was hard to deal with. that’s what makes me love u more. u never gave up on me, even when i didn’t deserve it. i know i keep repeating the same mistakes, but i swear im learning little by little. i just wish i could hold u right now and tell u everything face to face, i’d tell u how much i regret hurting u, how much i want to make it right. u mean more to me than anything. even when i feel lost, u are the only person that reminds me who i am. u make me feel safe, and i dont want to lose that, i dont want to lose us. i’ll do whatever it takes to make u feel loved again. i’ll show u that i can change, that i can be the guy u deserve, not just through words but through actions. even if it takes time, i’ll wait, i’ll be patient. i’ll prove to u that this love is real. i dont care how broken i feel sometimes, u are the reason i want to get better. i want to heal so i can be someone who gives u peace, not pain. i’ll try even if it hurts, because u are worth it, always. i love u, bebe, no matter how many times i fall, i’ll still get up for u, always. </p> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Music Section -->
+        <div id="music" class="section">
+            <h2>Our Songs 🎵</h2>
+            <div class="music-grid">
+                 <div class="music-card">
+            <h3>Tip Toe</h3>
+            <p>HYBS</p>
+            <audio controls style="width: 100%; margin-top: 10px;">
+                <source src="HYBS - Tip Toe (Official Video).mp3" type="audio/mpeg">
+                <source src="audio/our-song-1.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+                <div class="music-card">
+                    <h3>UNDERSTAND</h3>
+                    <p>keshi</p>
+                     <audio controls style="width: 100%; margin-top: 10px;">
+                <source src="keshi - UNDERSTAND (Visualizer).mp3" type="audio/mpeg">
+                <source src="audio/our-song-1.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+                </div>
+                <div class="music-card">
+                    <h3>Our Song 3</h3>
+                    <p>Artist Name</p>
+                    <audio controls style="width: 100%; margin-top: 10px;">
+                        <source src="#" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes" class="section">
+            <h2>Sweet Notes 📝</h2>
+            <div class="notes-container">
+                <div class="note-card">
+                    <h3>Why I Love You</h3>
+                    <p>💖 Your beautiful smile that lights up my world</p>
+                    <p>💖 Your kind heart that cares for everyone</p>
+                    <p>💖 The way you make me laugh</p>
+                    <p>💖 -- the notes is still under construction--</p>
+                </div>
+                <div class="note-card">
+                    <h3>Our Memories</h3>
+                    <p>🌟 _________________</p>
+                    <p>🌟 _________________</p>
+                    <p>🌟 _________________</p>
+                </div>
+                <div class="note-card">
+                    <h3>Future Dreams</h3>
+                    <p>✨ _________________</p>
+                    <p>✨ _________________</p>
+                    <p>✨_________________</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="gallery" class="section">
+            <h2>Our Gallery 📸</h2>
+            <div class="gallery-grid">
+               <div class="gallery-item" onclick="openModal('Screenshot (216)-DESKTOP-1QJEST6-min.png')">
+    <img src="Screenshot (216)-DESKTOP-1QJEST6-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (245)-DESKTOP-1QJEST6-min.png')">
+    <img src="Screenshot (245)-DESKTOP-1QJEST6-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (666)-min.png')">
+    <img src="Screenshot (666)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (914)-min.png')">
+    <img src="Screenshot (914)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (945)-min.png')">
+    <img src="Screenshot (945)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (994)-min.png')">
+    <img src="Screenshot (994)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1020)-min.png')">
+    <img src="Screenshot (1020)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1031)-min.png')">
+    <img src="Screenshot (1031)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1045)-min.png')">
+    <img src="Screenshot (1045)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1055)-min.png')">
+    <img src="Screenshot (1055)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1056)-min.png')">
+    <img src="Screenshot (1056)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1057)-min.png')">
+    <img src="Screenshot (1057)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1059)-min.png')">
+    <img src="Screenshot (1059)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1061)-min.png')">
+    <img src="Screenshot (1061)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1062)-min.png')">
+    <img src="Screenshot (1062)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1080)-min.png')">
+    <img src="Screenshot (1080)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1085)-min.png')">
+    <img src="Screenshot (1085)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1128)-min.png')">
+    <img src="Screenshot (1128)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1142)-min.png')">
+    <img src="Screenshot (1142)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1144)-min.png')">
+    <img src="Screenshot (1144)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1160)-min.png')">
+    <img src="Screenshot (1160)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1163)-min.png')">
+    <img src="Screenshot (1163)-min.png" alt="Screenshot" class="gallery-image">
+</div>  
+<div class="gallery-item" onclick="openModal('Screenshot (1170)-min.png')">
+    <img src="Screenshot (1170)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1172)-min.png')">
+    <img src="Screenshot (1172)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1179)-min.png')">
+    <img src="Screenshot (1179)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1206)-min.png')">
+    <img src="Screenshot (1206)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1273)-min.png')">
+    <img src="Screenshot (1273)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1302)-min.png')">
+    <img src="Screenshot (1302)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1305)-min.png')">
+    <img src="Screenshot (1305)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1328)-min.png')">
+    <img src="Screenshot (1328)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1360)-min.png')">
+    <img src="Screenshot (1360)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1389)-min.png')">
+    <img src="Screenshot (1389)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1390)-min.png')">
+    <img src="Screenshot (1390)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1395)-min.png')">
+    <img src="Screenshot (1395)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1396)-min.png')">
+    <img src="Screenshot (1396)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1397)-min.png')">
+    <img src="Screenshot (1397)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1439)-min.png')">
+    <img src="Screenshot (1439)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1449)-min.png')">
+    <img src="Screenshot (1449)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1451)-min.png')">
+    <img src="Screenshot (1451)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1453)-min.png')">
+    <img src="Screenshot (1453)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1469)-min.png')">
+    <img src="Screenshot (1469)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1507)-min.png')">
+    <img src="Screenshot (1507)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1517)-min.png')">
+    <img src="Screenshot (1517)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1551)-min.png')">
+    <img src="Screenshot (1551)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1552)-min.png')">
+    <img src="Screenshot (1552)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1580)-min.png')">
+    <img src="Screenshot (1580)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1585)-min.png')">
+    <img src="Screenshot (1585)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1591)-min.png')">
+    <img src="Screenshot (1591)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1592)-min.png')">
+    <img src="Screenshot (1592)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1606)-min.png')">
+    <img src="Screenshot (1606)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1625)-min.png')">
+    <img src="Screenshot (1625)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1626)-min.png')">
+    <img src="Screenshot (1626)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1652)-min.png')">
+    <img src="Screenshot (1652)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1658)-min.png')">
+    <img src="Screenshot (1658)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1763)-min.png')">
+    <img src="Screenshot (1763)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1766)-min.png')">
+    <img src="Screenshot (1766)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1770)-min.png')">
+    <img src="Screenshot (1770)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1771)-min.png')">
+    <img src="Screenshot (1771)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1773)-min.png')">
+    <img src="Screenshot (1773)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1777)-min.png')">
+    <img src="Screenshot (1777)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1786)-min.png')">
+    <img src="Screenshot (1786)-min.png" alt="Screenshot" class="gallery-image">
+</div>  
+<div class="gallery-item" onclick="openModal('Screenshot (1852)-min.png')">
+    <img src="Screenshot (1852)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1953)-min.png')">
+    <img src="Screenshot (1953)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1956)-min.png')">
+    <img src="Screenshot (1956)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1958)-min.png')">
+    <img src="Screenshot (1958)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1963)-min.png')">
+    <img src="Screenshot (1963)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (1965)-min.png')">
+    <img src="Screenshot (1965)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2102)-min.png')">
+    <img src="Screenshot (2102)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2153)-min.png')">
+    <img src="Screenshot (2153)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2163)-min.png')">
+    <img src="Screenshot (2163)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2199)-min.png')">
+    <img src="Screenshot (2199)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2201)-min.png')">
+    <img src="Screenshot (2201)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2294)-min.png')">
+    <img src="Screenshot (2294)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2339)-min.png')">
+    <img src="Screenshot (2339)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2346)-min.png')">
+    <img src="Screenshot (2346)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2350)-min.png')">
+    <img src="Screenshot (2350)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+<div class="gallery-item" onclick="openModal('Screenshot (2394)-min.png')">
+    <img src="Screenshot (2394)-min.png" alt="Screenshot" class="gallery-image">
+</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsBackground = document.getElementById('heartsBackground');
+            const heartCount = window.innerWidth < 480 ? 10 : 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heartsBackground.appendChild(heart);
+            }
+        }
+
+        // Navigation function
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section and activate button
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Toggle letter expansion
+        function toggleLetter(card) {
+            const content = card.querySelector('.letter-content');
+            const isExpanded = content.classList.contains('expanded');
+            
+            // Close all other letters
+            document.querySelectorAll('.letter-content').forEach(letter => {
+                letter.classList.remove('expanded');
+            });
+            
+            // If this letter wasn't expanded, expand it
+            if (!isExpanded) {
+                content.classList.add('expanded');
+            }
+        }
+
+        // Modal functions for gallery
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize hearts when page loads
+        window.onload = function() {
+            createHearts();
+        };
+
+        // Adjust hearts on resize
+        window.addEventListener('resize', function() {
+            const heartsBackground = document.getElementById('heartsBackground');
+            heartsBackground.innerHTML = '';
+            createHearts();
+        });
+    </script>
+</body>
+</html>
