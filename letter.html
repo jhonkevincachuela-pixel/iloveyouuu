@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love - Good Luck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            overflow: hidden;
+            padding: 20px;
+            transition: background 2s ease-in-out;
+        }
+
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 16px;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 35px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
+            font-weight: 300;
+        }
+
+        .letter-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 300;
+            transition: all 2s ease-in-out;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .signature {
+            font-size: 1.5em;
+            font-style: italic;
+            text-align: right;
+            margin-top: 30px;
+            color: #a8e6f0;
+            font-weight: 400;
+            transition: all 2s ease-in-out;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Fire theme classes that will be added gradually */
+        .fire-theme-1 {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ff6b6b 100%);
+        }
+
+        .fire-theme-2 {
+            background: linear-gradient(135deg, #1e3c72 0%, #ff6b6b 50%, #ffa726 100%);
+        }
+
+        .fire-theme-3 {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 50%, #ffeb3b 100%);
+        }
+
+        .fire-theme-4 {
+            background: linear-gradient(135deg, #ff512f 0%, #f09819 100%);
+        }
+
+        .fire-text {
+            color: #fff3e0;
+            text-shadow: 2px 2px 8px rgba(255, 87, 34, 0.4);
+        }
+
+        .fire-container {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px rgba(255, 87, 34, 0.2);
+        }
+
+        .fire-signature {
+            color: #ffcc80;
+        }
+
+        /* Tablet Styles */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 2.3em;
+            }
+            
+            .letter-content {
+                font-size: 1.1em;
+            }
+            
+            .signature {
+                font-size: 1.3em;
+            }
+        }
+
+        /* Mobile Styles */
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 25px 20px;
+                border-radius: 18px;
+            }
+            
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .signature {
+                font-size: 1.2em;
+            }
+            
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+            
+            .heart {
+                font-size: 14px;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media screen and (max-width: 360px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .letter-content {
+                font-size: 0.95em;
+            }
+            
+            .signature {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- Letter Container -->
+    <div class="container" id="letterContainer">
+        <h1 id="mainTitle">ellow bebe</h1>
+        
+        <div class="letter-content" id="letterContent">
+            <p>Baby, I just wanna tell you good luck on your exam. You've worked for this, you've pushed yourself, and even when you're tired, you still keep going, and that's something I really admire in you.</p>
+            
+            <p>I know sometimes you doubt yourself or feel nervous, but trust me, you're stronger and smarter than you think. Every time you study, every time you try, every time you show up, you're proving that you're ready for this.</p>
+            
+            <p>If you get stuck on something, don't panic. Just breathe and move forward. Your mind is capable, your heart is strong, and everything you learned is sitting right there, waiting for you to pull it out.</p>
+            
+            <p>Trust your pace, baby, trust your process. Good luck, my love. Just know that whatever happens, I'm already proud of you, I'm already happy to see how far you've come, and I'm already grateful that I get to watch you grow.</p>
+            
+            <p>You're gonna do great because it's you, and you always rise. Now go in there with your head high and your heart steady. You got this, baby. I believe in you always and forever.</p>
+        </div>
+        
+        <a href="main.html" class="back-btn">Return to Main</a>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsBackground = document.getElementById('heartsBackground');
+            const heartCount = window.innerWidth < 480 ? 8 : 12;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💙';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heartsBackground.appendChild(heart);
+            }
+        }
+
+        // Color transition over 4 minutes (240 seconds)
+        function startColorTransition() {
+            const body = document.body;
+            const container = document.getElementById('letterContainer');
+            const title = document.getElementById('mainTitle');
+            const content = document.getElementById('letterContent');
+            const signature = document.getElementById('signature');
+            const hearts = document.querySelectorAll('.heart');
+            
+            // Transition intervals (4 minutes total)
+            const intervals = [
+                { time: 60000, theme: 'fire-theme-1' },  // 1 minute
+                { time: 120000, theme: 'fire-theme-2' }, // 2 minutes
+                { time: 180000, theme: 'fire-theme-3' }, // 3 minutes
+                { time: 240000, theme: 'fire-theme-4' }  // 4 minutes
+            ];
+
+            intervals.forEach((interval, index) => {
+                setTimeout(() => {
+                    // Update body background
+                    body.className = interval.theme;
+                    
+                    // Update container and text for fire theme
+                    if (index >= 1) {
+                        container.classList.add('fire-container');
+                        title.classList.add('fire-text');
+                        content.classList.add('fire-text');
+                        signature.classList.add('fire-signature');
+                    }
+                    
+                    // Change heart colors gradually
+                    hearts.forEach(heart => {
+                        if (index === 0) heart.innerHTML = '💙';
+                        else if (index === 1) heart.innerHTML = '💜';
+                        else if (index === 2) heart.innerHTML = '❤️';
+                        else heart.innerHTML = '🧡';
+                    });
+                    
+                }, interval.time);
+            });
+        }
+
+        // Initialize when page loads
+        window.onload = function() {
+            createHearts();
+            startColorTransition();
+        };
+
+        // Adjust hearts on resize
+        window.addEventListener('resize', function() {
+            const heartsBackground = document.getElementById('heartsBackground');
+            heartsBackground.innerHTML = '';
+            createHearts();
+        });
+    </script>
+</body>
+</html>
