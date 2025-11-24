@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* Floating Hearts */
+      
         .hearts-background {
             position: fixed;
             top: 0;
@@ -383,105 +383,104 @@
         </div>
     </div>
 
-    <script>
-        // Create floating hearts
-        function createHearts() {
-            const heartsBackground = document.getElementById('heartsBackground');
-            const heartCount = window.innerWidth < 480 ? 8 : 12;
+<script>
+    // Create floating hearts
+    function createHearts() {
+        const heartsBackground = document.getElementById('heartsBackground');
+        const heartCount = window.innerWidth < 480 ? 8 : 12;
+        
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💕';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heartsBackground.appendChild(heart);
+        }
+    }
+
+    // Toggle password visibility
+    function togglePassword() {
+        const passwordInput = document.getElementById('secretCode');
+        const eyeToggle = document.getElementById('eyeToggle');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeToggle.textContent = '👁️‍🗨️';
+            eyeToggle.style.opacity = '1';
+        } else {
+            passwordInput.type = 'password';
+            eyeToggle.textContent = '👁️';
+            eyeToggle.style.opacity = '0.7';
+        }
+    }
+
+    function checkCode() {
+        const secretCode = document.getElementById('secretCode').value.toLowerCase().trim();
+        const errorMessage = document.getElementById('errorMessage');
+        const container = document.getElementById('entrancePage');
+        const welcomeContainer = document.getElementById('welcomeContainer');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+
+        let redirectUrl = '';
+        
+        if (secretCode === 'october 7 2008') {
+            redirectUrl = 'main.html';
+        } else if (secretCode === '10/7/2008') {
+            redirectUrl = 'lyrics.html';
+        } else {
+            errorMessage.textContent = 'Incorrect code! Try again 💕';
+            // Shake animation for wrong code
+            const input = document.getElementById('secretCode');
+            input.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                input.style.animation = '';
+            }, 500);
+            return;
+        }
+
+        errorMessage.textContent = '';
+        
+        // Fade out the secret code container
+        container.classList.add('fade-out');
+        
+        // Show welcome container after a short delay
+        setTimeout(() => {
+            welcomeContainer.classList.add('show');
             
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '💕';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
-                heart.style.animationDelay = Math.random() * 6 + 's';
-                heartsBackground.appendChild(heart);
-            }
-        }
-
-        // Toggle password visibility
-        function togglePassword() {
-            const passwordInput = document.getElementById('secretCode');
-            const eyeToggle = document.getElementById('eyeToggle');
+            // Show welcome message with delay
+            setTimeout(() => {
+                welcomeMessage.classList.add('show');
+            }, 500);
             
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeToggle.textContent = '👁️‍🗨️';
-                eyeToggle.style.opacity = '1';
-            } else {
-                passwordInput.type = 'password';
-                eyeToggle.textContent = '👁️';
-                eyeToggle.style.opacity = '0.7';
-            }
+            // Redirect to the appropriate page after welcome message
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 3500);
+            
+        }, 800);
+    }
+
+    // Allow pressing Enter key
+    document.getElementById('secretCode').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkCode();
         }
+    });
 
-        function checkCode() {
-            const secretCode = document.getElementById('secretCode').value.toLowerCase().trim();
-            const correctCode = 'october 7 2008';
-            const errorMessage = document.getElementById('errorMessage');
-            const container = document.getElementById('entrancePage');
-            const welcomeContainer = document.getElementById('welcomeContainer');
-            const welcomeMessage = document.getElementById('welcomeMessage');
-            const welcomeHearts = document.getElementById('welcomeHearts');
+    // Initialize hearts when page loads
+    window.onload = function() {
+        createHearts();
+    };
 
-            if (secretCode === correctCode) {
-                errorMessage.textContent = '';
-                
-                // Fade out the secret code container
-                container.classList.add('fade-out');
-                
-                // Show welcome container after a short delay
-                setTimeout(() => {
-                    welcomeContainer.classList.add('show');
-                    
-                    // Show welcome message with delay
-                    setTimeout(() => {
-                        welcomeMessage.classList.add('show');
-                    }, 500);
-                    
-                    // Show hearts with delay
-                    setTimeout(() => {
-                        welcomeHearts.classList.add('show');
-                    }, 1000);
-                    
-                    // Redirect to main website after welcome message
-                    setTimeout(() => {
-                        window.location.href = 'main.html';
-                    }, 3500);
-                    
-                }, 800);
-                
-            } else {
-                errorMessage.textContent = 'Incorrect code! Try again 💕';
-                // Shake animation for wrong code
-                const input = document.getElementById('secretCode');
-                input.style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    input.style.animation = '';
-                }, 500);
-            }
-        }
-
-        // Allow pressing Enter key
-        document.getElementById('secretCode').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkCode();
-            }
-        });
-
-        // Initialize hearts when page loads
-        window.onload = function() {
-            createHearts();
-        };
-
-        // Adjust hearts on resize
-        window.addEventListener('resize', function() {
-            const heartsBackground = document.getElementById('heartsBackground');
-            heartsBackground.innerHTML = '';
-            createHearts();
-        });
-    </script>
+    // Adjust hearts on resize
+    window.addEventListener('resize', function() {
+        const heartsBackground = document.getElementById('heartsBackground');
+        heartsBackground.innerHTML = '';
+        createHearts();
+    });
+</script>
 </body>
 </html> 
